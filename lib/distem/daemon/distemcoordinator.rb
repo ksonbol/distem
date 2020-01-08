@@ -1171,12 +1171,13 @@ module Distem
         desc['image']
         desc['shared'] = parse_bool(desc['shared'])
         desc['cow'] = parse_bool(desc['cow'])
-
+        dsec['path'] = desc['path'] or Resource::FileSystem::PATH_DEFAULT_ROOTFS_UNIQUE
         if !vfilesystem_throttling_check(desc)
             desc['disk_throttling'] = nil
         end
 
-        vnode.filesystem = Resource::FileSystem.new(desc['image'],desc['shared'],desc['cow'],desc['disk_throttling'])
+        vnode.filesystem = Resource::FileSystem.new(desc['image'],desc['path'],desc['shared'],desc['cow'],
+                                                    desc['disk_throttling'])
         return vnode.filesystem
       end
 

@@ -808,8 +808,9 @@ module Distem
         desc['shared'] = parse_bool(desc['shared'])
         desc['cow'] = parse_bool(desc['cow'])
         desc['disk_throttling'] = nil if !desc.has_key?('disk_throttling')
+        dsec['path'] = desc['path'] or Resource::FileSystem::PATH_DEFAULT_ROOTFS_UNIQUE
 
-        vnode.filesystem = Resource::FileSystem.new(CGI.unescape(desc['image']),desc['shared'],desc['cow'],desc['disk_throttling'])
+        vnode.filesystem = Resource::FileSystem.new(CGI.unescape(desc['image']),desc['path'],desc['shared'],desc['cow'],desc['disk_throttling'])
 
         return vnode.filesystem
       end

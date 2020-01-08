@@ -8,8 +8,6 @@ module Distem
       # The directory to save container configuration files
       PATH_DEFAULT_CONFIGFILE="/tmp/distem/config/"
       # The directory used to save virtual nodes unique filesystem directories&files
-      PATH_DEFAULT_ROOTFS_UNIQUE="/tmp/distem/rootfs-unique/"
-      # The directory used to save virtual nodes unique filesystem directories&files
       PATH_DEFAULT_ROOTFS_SHARED="/tmp/distem/rootfs-shared/"
 
 
@@ -25,7 +23,7 @@ module Distem
         end
 
         rootfsfile = Lib::FileManager.download(@resource.image)
-        uniquefspath = File.join(PATH_DEFAULT_ROOTFS_UNIQUE,vnode.name)
+        uniquefspath = File.join(@resource.path,vnode.name)
 
         block = Proc.new { |filepath,mode|
           Lib::Shell.run("rm -Rf #{filepath}") if File.exist?(filepath)

@@ -6,6 +6,8 @@ module Distem
     # Abstract description of the filesystem used on a VNode
     class FileSystem
       # The VNode associated to this FileSystem
+      # The directory used to save virtual nodes unique filesystem directories&files
+      PATH_DEFAULT_ROOTFS_UNIQUE="/tmp/distem/rootfs-unique/"
       # The URI to the -bootstrapped and compressed- image file
       attr_accessor :image
       # Is the file system shared between several nodes ?
@@ -21,14 +23,14 @@ module Distem
 
 
       # Create a new FileSystem
-      def initialize(image,shared = false,cow = false, disk_throttling = {})
+      def initialize(image, path = PATH_DEFAULT_ROOTFS_UNIQUE, shared = false, cow = false, disk_throttling = {})
         # checking image
         @image = URI.parse(image) # It should not be CGI.escaped
         @image.scheme = "file" if @image.scheme.nil?
 
         @shared = shared
         @cow = cow
-        @path = nil
+        @path = path
         @sharedpath = nil
         @disk_throttling = disk_throttling
       end
