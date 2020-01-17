@@ -1171,7 +1171,7 @@ module Distem
         desc['image']
         desc['shared'] = parse_bool(desc['shared'])
         desc['cow'] = parse_bool(desc['cow'])
-        dsec['path'] = desc['path'] or Resource::FileSystem::PATH_DEFAULT_ROOTFS_UNIQUE
+        desc['path'] = desc['path'] or Resource::FileSystem::PATH_DEFAULT_ROOTFS_UNIQUE
         if !vfilesystem_throttling_check(desc)
             desc['disk_throttling'] = nil
         end
